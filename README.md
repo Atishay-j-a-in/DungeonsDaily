@@ -110,7 +110,7 @@ pnpm --filter @dungeonsdaily/api ai:check   # verify Google key → SDK → Gemm
 
 ## Render deployment
 
-- Web service, build `pnpm install && pnpm build`, start `pnpm --filter @dungeonsdaily/api start`
+- Web service, build `pnpm install --frozen-lockfile && pnpm --filter @dungeonsdaily/api build`, start `pnpm --filter @dungeonsdaily/api start`
 - Listens on `0.0.0.0` + `process.env.PORT`, exposes `/api/v1/health`
 - Set secrets as Render env vars (same names as `.env.example`)
 
