@@ -1,0 +1,22 @@
+{
+  "name": "dungeonsdaily",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DungeonsDaily — voice-driven fantasy fitness RPG (backend-first MVP). Gemma is the open-weight AI core.",
+  "packageManager": "pnpm@12.10.1",
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "dev:api": "pnpm --filter @dungeonsdaily/api dev",
+    "dev:web": "pnpm --filter @dungeonsdaily/web dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.7",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

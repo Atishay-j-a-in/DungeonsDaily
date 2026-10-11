@@ -1,0 +1,23 @@
+# Deps
+node_modules/
+
+# Builds
+dist/
+build/
+*.tsbuildinfo
+apps/web/dist/
+.turbo/
+
+# Env — never commit real secrets
+.env
+.env.local
+apps/api/.env
+apps/web/.env
+
+# Logs / OS
+*.log
+.DS_Store
+Thumbs.db
+
+# Vitest / coverage
+coverage/

@@ -1,0 +1,27 @@
+{
+  "name": "@dungeonsdaily/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5173",
+    "build": "tsc -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "test": "echo \"web: no tests\"",
+    "lint": "echo \"web: no lint configured\""
+  },
+  "dependencies": {
+    "@clerk/react": "^6.17.7",
+    "@dungeonsdaily/shared": "workspace:*",
+    "@sentry/react": "^11.6.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}

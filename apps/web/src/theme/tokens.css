@@ -1,0 +1,159 @@
+/* Ember Dungeon theme: green-black stone surfaces, molten gold reserved for
+ * the moments that matter (DM speech, exercise calls, victory). OKLCH
+ * throughout; neutrals tinted toward the brand hue (160), never warm-gray. */
+
+:root {
+  /* Surfaces (depth = lightness, same hue/chroma; no shadows in dark mode) */
+  --bg-0: oklch(11% 0.022 160);
+  --bg-1: oklch(15.5% 0.028 160);
+  --bg-2: oklch(20.5% 0.032 160);
+  --bg-3: oklch(25.5% 0.034 160);
+
+  /* Ink */
+  --ink: oklch(93% 0.018 160);
+  --ink-dim: oklch(76% 0.028 160);
+  --ink-faint: oklch(68% 0.028 160);
+
+  /* Gold accent: primary actions, DM speech, victory. Rare by design. */
+  --gold: oklch(79% 0.135 86);
+  --gold-soft: oklch(72% 0.1 86);
+  --gold-deep: oklch(60% 0.11 82);
+  --gold-wash: oklch(79% 0.135 86 / 0.09);
+  --on-gold: oklch(16% 0.03 160);
+
+  /* Semantic (muted to sit inside the dungeon, never neon) */
+  --ember: oklch(66% 0.13 28);
+  --moss: oklch(76% 0.11 158);
+  --amber-note: oklch(78% 0.12 78);
+
+  /* Hairlines, focus */
+  --line: oklch(29% 0.03 160);
+  --line-soft: oklch(23% 0.028 160);
+  --focus: oklch(79% 0.135 86);
+
+  /* Type: display serif for story content only; system sans for UI chrome */
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --text-caption: 0.75rem;
+  --text-secondary: 0.875rem;
+  --text-body: 1rem;
+  --text-lead: 1.25rem;
+  --text-title: 1.5rem;
+  --text-display: 2rem;
+
+  /* 4pt-base spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-state: 240ms;
+
+  /* Semantic z-index scale */
+  --z-base: 1;
+  --z-orb-glow: 0;
+  --z-toast: 50;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-0);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  letter-spacing: 0.012em;
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Faint radial ember glow behind everything; static, zero motion cost */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(
+      60% 42% at 50% 0%,
+      oklch(24% 0.05 160),
+      transparent 70%
+    ),
+    radial-gradient(
+      34% 26% at 50% 108%,
+      oklch(30% 0.07 80 / 0.5),
+      transparent 70%
+    );
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  line-height: 1.15;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+input,
+select {
+  font: inherit;
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
