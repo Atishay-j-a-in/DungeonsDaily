@@ -2,6 +2,8 @@ import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 import { clerkMiddleware, requireAuth } from "@clerk/express";
+import { getDb } from "./db/mongo.js";
+import { env, hasGemma } from "./config/env.js";
 import { sessionRouter, userRouter } from "./modules/sessions/session.routes.js";
 import { voiceRouter } from "./modules/voice/voice.controller.js";
 import { errorMiddleware, notFoundMiddleware } from "./middleware/error.js";
@@ -17,7 +19,16 @@ export function createApp(): express.Express {
   app.use(clerkMiddleware());
 
   app.get("/api/v1/health", (_req, res) => {
-    res.json({ status: "ok" });
+    res.json({
+      status: "ok",
+      uptimeSeconds: Math.floor(process.uptime()),
+      checks: {
+        // MongoDB: connected to Atlas, or in-memory fallback when unconfigured.
+        mongo: getDb() ? "connected" : "memory-fallback",
+        // DM narration: OpenRouter gateway, Google direct, or Fake DM.
+        ai: hasGemma ? `live:${env.gemmaModel}` : "fake-deterministic",
+      },
+    });
   });
 
   // History is per-user and writes are attributed server-side: every route
